@@ -162,13 +162,6 @@ version-controlled is everything needed to regenerate them: the LAMMPS input
 scripts, the shared starting configuration, and the small numeric/plot
 results already computed from past runs.
 
-## Repository maintenance
 
-`cleanup_and_organize.sh` (at the repository root) documents, in
-reproducible script form, the reorganization performed on this repository:
-removing scheduler/cache/junk files, deleting large regenerable trajectory
-and restart outputs, deduplicating identical helper scripts, and renaming
-directories to the structure described above. Run it against a **fresh
-clone of the pre-cleanup repository** if you need to reproduce these steps
 elsewhere; running it against this already-cleaned repository is a no-op
 (all source paths will already have been moved).
