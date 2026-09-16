@@ -47,18 +47,17 @@ case1_single_polymer_single_receptor/
 │       └── ... (same internal layout as above)
 │
 ├── analysis/                        # case-wide analysis scripts & aggregated results
-│   ├── scripts/                     # canonical copies of a_cluster_lammps.py, b_cluster_lammps.py
-│   ├── copy_codes.sh, run_codes.sh          # deploy + run the CLI cluster-analysis tools across every N_*
-│   ├── copy_plots.sh, run_plots.sh          # deploy + run plots.ipynb across every N_*
-│   ├── Analysis.sh, run_all_notebooks.sh    # deploy + run the density-profile notebook across every N_*
-│   ├── condensed_chain_fraction_vs_receptor_count.ipynb  # fraction of chains in the dense phase vs. R (uses Total_dense_chains.npy)
-│   ├── z_dense_phase_density.ipynb          # z-density profile of the condensate
-│   ├── radial_density_analysis.ipynb        # radial distribution / minimum-image-distance analysis
-│   ├── largest_conn_cluster.ipynb           # standalone largest-cluster notebook (case-level copy)
-│   ├── largest_cluster_analysis.py          # CLI scripts aggregating across both conditions -> Fig. 3-style plots
-│   └── results/                             # all small numeric/plot outputs (csv, png, pdf, npy caches)
-│
-└── NOTES_from_original_repo.txt     # short author notes recovered verbatim from the original repository
+    ├── scripts/                     # canonical copies of a_cluster_lammps.py, b_cluster_lammps.py
+    ├── copy_codes.sh, run_codes.sh          # deploy + run the CLI cluster-analysis tools across every N_*
+    ├── copy_plots.sh, run_plots.sh          # deploy + run plots.ipynb across every N_*
+    ├── Analysis.sh, run_all_notebooks.sh    # deploy + run the density-profile notebook across every N_*
+    ├── condensed_chain_fraction_vs_receptor_count.ipynb  # fraction of chains in the dense phase vs. R (uses Total_dense_chains.npy)
+    ├── z_dense_phase_density.ipynb          # z-density profile of the condensate
+    ├── radial_density_analysis.ipynb        # radial distribution / minimum-image-distance analysis
+    ├── largest_conn_cluster.ipynb           # standalone largest-cluster notebook (case-level copy)
+    ├── largest_cluster_analysis.py          # CLI scripts aggregating across both conditions -> Fig. 3-style plots
+    └── results/                             # all small numeric/plot outputs (csv, png, pdf, npy caches)
+
 ```
 
 ## Important parameters (Table I of the paper, subset relevant to this case)
@@ -116,13 +115,8 @@ provenance. If you need the canonical starting configuration, use
 |---|---|
 | `initial_configuration/Input_file.ipynb` | Generates `initial.xyz`, the starting polymer-only configuration (fixed seed). |
 | `simulations/<condition>/N_<R>/lammps_sim.in` | Production LAMMPS run: reads the equilibrated restart, inserts R receptors, integrates 2×10⁷ Langevin dynamics steps. |
-| `analysis/scripts/a_cluster_lammps.py` / `b_cluster_lammps.py` | Connected-component cluster analysis CLI tools (operate on `lammps.data` + `traj.lammpstrj`; different atom-type/chain-grouping options select polymer vs. receptor clustering). |
-| `analysis/condensed_chain_fraction_vs_receptor_count.ipynb` | Computes the fraction of scaffold chains residing in the dense phase as a function of receptor count. |
-| `analysis/z_dense_phase_density.ipynb` | Computes the density profile of the condensate along z. |
+| `analysis/scripts/a_cluster_lammps.py` / `b_cluster_lammps.py` | Connected-component cluster analysis CLI tools (operate on `lammps.data` + `traj.lammpstrj`; different atom-type/chain-grouping options select polymer vs. receptor clustering). 
 | `analysis/radial_density_analysis.ipynb` | Radial density / minimum-image-distance analysis around the condensate. |
-| `analysis/fraction_vs_N.py` | Aggregates the largest-cluster fraction across every `N_*` folder for both conditions and plots it vs. receptor count (Fig. 3 style). |
 | `analysis/largest_cluster_analysis.py` | OVITO-based cluster-size analysis across all runs, with automatic interaction-cutoff detection from the folder path. |
-| `analysis/rdf_e_basecase.py` | Radial distribution function comparison across conditions. |
 | `analysis/copy_codes.sh` / `run_codes.sh` | Deploy and execute the CLI cluster-analysis tools across every `N_*` folder. |
 | `analysis/copy_plots.sh` / `run_plots.sh` | Deploy and execute `plots.ipynb` across every `N_*` folder. |
-| `analysis/Analysis.sh` / `run_all_notebooks.sh` | Deploy and execute the density-profile notebook across every `N_*` folder (`Analysis.sh` also submits each as an HPC batch job). |
