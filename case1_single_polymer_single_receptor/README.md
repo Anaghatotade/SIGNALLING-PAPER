@@ -55,7 +55,7 @@ case1_single_polymer_single_receptor/
 │   ├── z_dense_phase_density.ipynb          # z-density profile of the condensate
 │   ├── radial_density_analysis.ipynb        # radial distribution / minimum-image-distance analysis
 │   ├── largest_conn_cluster.ipynb           # standalone largest-cluster notebook (case-level copy)
-│   ├── fraction_vs_N.py, largest_cluster_analysis.py, rdf_e_basecase.py   # CLI scripts aggregating across both conditions -> Fig. 3-style plots
+│   ├── largest_cluster_analysis.py          # CLI scripts aggregating across both conditions -> Fig. 3-style plots
 │   └── results/                             # all small numeric/plot outputs (csv, png, pdf, npy caches)
 │
 └── NOTES_from_original_repo.txt     # short author notes recovered verbatim from the original repository
