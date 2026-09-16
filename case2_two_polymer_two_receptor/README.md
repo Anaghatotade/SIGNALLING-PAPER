@@ -52,7 +52,7 @@ case2_two_polymer_two_receptor/
     ├── copy_ALL.sh, run_ALL.sh                              # deploy + run the per-species notebooks across every N_*
     ├── copy_plots.sh, run_plots.sh                          # deploy + run plots.ipynb across every N_*
     ├── collect_cluster_plots.py                             # standalone MDAnalysis-based cluster-fraction-vs-frame plotter, collects results into analysis/results/all_largest_cluster_fraction_png/
-    ├── fraction_vs_N.py, largest_cluster_analysis.py, rdf.py, rdf_e_basecase.py   # CLI scripts aggregating across the four eps(P1-P2) conditions -> Fig. 5-style plots
+    ├── largest_cluster_analysis.py,                         # CLI scripts aggregating across the four eps(P1-P2) conditions -> Fig. 5-style plots
     └── results/                                             # all small numeric/plot outputs (csv, png, pdf)
 ```
 
