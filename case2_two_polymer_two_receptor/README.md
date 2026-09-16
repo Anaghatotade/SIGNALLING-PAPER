@@ -42,9 +42,6 @@ case2_two_polymer_two_receptor/
 │           ├── receptor_cluster_lammps.py     # per-run copy of the CLI receptor-cluster tool (not fully identical across all runs; see note below)
 │           └── plots.ipynb                    # per-run plotting notebook
 │
-├── exploratory/                     # NOT part of the paper's four published P1-P2 cases; kept for completeness
-│   ├── wca_interpolymer_eps0.5_cutoff1.1225/   # P1-P2 interaction modeled as purely repulsive WCA instead of attractive LJ
-│   └── core_shell_trials/try0 .. try5/          # preliminary "core-shell" topology trial runs
 │
 └── analysis/                        # case-wide analysis scripts & aggregated results
     ├── scripts/                      # canonical copies of a/b/c/d_cluster_lammps.py, cluster_lammps.py, largest_conn_cluster_receptorC/D.ipynb
