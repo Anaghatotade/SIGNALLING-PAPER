@@ -48,7 +48,6 @@ caseN_.../
 ├── initial_configuration/     # equilibration stage: builds the starting polymer configuration
 ├── simulations/                # production LAMMPS runs, organized by physical condition, then by receptor count (N_<R>)
 ├── analysis/                   # analysis scripts, notebooks, and results
-└── exploratory/  (case 2 only) # trial runs not part of the paper's main published cases
 ```
 
 See `case1_single_polymer_single_receptor/README.md` and
