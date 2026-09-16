@@ -130,9 +130,7 @@ case2_two_polymer_two_receptor/
 | `analysis/scripts/b_cluster_lammps.py` / `d_cluster_lammps.py` | Clustering restricted to polymer B / receptor D (atom type 2 / type 4). |
 | `receptor_cluster_lammps.py` (per-run) | Combined R1+R2 receptor clustering. |
 | `analysis/collect_cluster_plots.py` | Standalone MDAnalysis-based largest-cluster-fraction-vs-frame calculator; collects one plot per run into `analysis/results/all_largest_cluster_fraction_png/`. |
-| `analysis/fraction_vs_N.py` | Aggregates the largest-cluster fraction across every condition/receptor-count folder and plots vs. receptor count. |
 | `analysis/largest_cluster_analysis.py` | OVITO-based cluster-size analysis across the four eps(P1-P2) conditions. |
-| `analysis/rdf.py` / `rdf_e_basecase.py` | Radial distribution function comparison across conditions (the `_e_basecase` variant explicitly skips the exploratory WCA case). |
 | `analysis/copy_cluster.sh` / `run_abcluster.sh` / `run_cluster.sh` | Deploy and execute the CLI cluster-analysis tools across every `N_*` folder. |
 | `analysis/copy_ALL.sh` / `run_ALL.sh` | Deploy and execute the per-species result notebooks across every `N_*` folder. |
 | `analysis/copy_plots.sh` / `run_plots.sh` | Deploy and execute `plots.ipynb` across every `N_*` folder. |
