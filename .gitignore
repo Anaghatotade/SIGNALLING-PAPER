@@ -1,0 +1,49 @@
+# ── Raw / regenerable simulation outputs ──────────────────────────────────
+# Large trajectory & structure dumps produced by running lammps_sim.in.
+# These are regenerable by rerunning the LAMMPS input scripts and are far
+# too large to version-control.
+lammps.data
+traj.lammpstrj
+file_trajectory.bin
+data[0-9]*.xyz
+data_final.xyz
+*.dcd
+*.xtc
+*.trr
+
+# Rolling / final LAMMPS restart checkpoints written during a run.
+# (prod.restart1 that is actually *read* as an input by a production run is
+# intentionally NOT ignored -- only the outputs below are.)
+prod.restart2
+prod.restart3
+restart.polymer_ring
+*.restart[2-9]
+
+# HPC scheduler stdout/stderr captures (LSF/SLURM), not scientific content.
+log_COC.*
+LAMMPS_OUTPUT.*
+lammps_test.out
+lammps_test.err
+*.o[0-9]*
+*.e[0-9]*
+slurm-*.out
+
+# ── Editor / OS / notebook caches ──────────────────────────────────────────
+.DS_Store
+._*
+*.swp
+*.swo
+.ipynb_checkpoints/
+.virtual_documents/
+__pycache__/
+*.pyc
+
+# Duplicate/backup file naming patterns
+*(copy)*
+* (2).*
+* (3).*
+
+# ── Local environment ───────────────────────────────────────────────────────
+.venv/
+venv/
+*.egg-info/

@@ -1,0 +1,190 @@
+pair_style lj/cut 2.5
+pair_modify shift yes
+
+read_data initial.xyz
+Reading data file ...
+  orthogonal box = (-30 -30 -35) to (30 30 35)
+  1 by 1 by 1 MPI processor grid
+  reading atoms ...
+  16250 atoms
+  scanning bonds ...
+  1 = max bonds/atom
+  reading bonds ...
+  15600 bonds
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        0        0       
+  special bond factors coul:  0        0        0       
+     2 = max # of 1-2 neighbors
+     2 = max # of 1-3 neighbors
+     4 = max # of 1-4 neighbors
+     6 = max # of special neighbors
+  special bonds CPU = 0.006 seconds
+  read_data CPU = 0.043 seconds
+bond_style fene
+special_bonds fene
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        1        1       
+  special bond factors coul:  0        1        1       
+     2 = max # of 1-2 neighbors
+     6 = max # of special neighbors
+  special bonds CPU = 0.002 seconds
+
+bond_coeff 1 10.0 2.0 1.0 1.0
+group polymer type 1
+16250 atoms in group polymer
+
+pair_coeff	* * 0.4 1.0 2.5
+
+neighbor       0.5 bin
+minimize 1.0e-4 1.0e-6 100 1000
+WARNING: Using 'neigh_modify every 1 delay 0 check yes' setting during minimization (src/min.cpp:187)
+Generated 0 of 1 mixed pair_coeff terms from geometric mixing rule
+Neighbor list info ...
+  update every 1 steps, delay 0 steps, check yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 3
+  ghost atom cutoff = 3
+  binsize = 1.5, bins = 40 40 47
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut, perpetual
+      attributes: half, newton on
+      pair build: half/bin/newton
+      stencil: half/bin/3d
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 7.518 | 7.518 | 7.518 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press     
+         0   0              1.2177722e+09  64408782       1.282181e+09   3.3072372e+08
+       100   0              21336.656      5541332        5562668.7      1435379.9    
+Loop time of 1.33231 on 1 procs for 100 steps with 16250 atoms
+
+99.7% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+Minimization stats:
+  Stopping criterion = max iterations
+  Energy initial, next-to-last, final = 
+      1282181029.12276     5856630.144891   5562668.67095915
+  Force two-norm initial, final = 5.3804493e+14 2.3650699e+10
+  Force max component initial, final = 6.1386561e+13 1.3863331e+10
+  Final line search alpha, max atom move = 2.3552827e-11 0.32652063
+  Iterations, force evaluations = 100 211
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 1.0376     | 1.0376     | 1.0376     |   0.0 | 77.88
+Bond    | 0.12205    | 0.12205    | 0.12205    |   0.0 |  9.16
+Neigh   | 0.098282   | 0.098282   | 0.098282   |   0.0 |  7.38
+Comm    | 0.0019567  | 0.0019567  | 0.0019567  |   0.0 |  0.15
+Output  | 8.8418e-05 | 8.8418e-05 | 8.8418e-05 |   0.0 |  0.01
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.07238    |            |       |  5.43
+
+Nlocal:          16250 ave       16250 max       16250 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:              0 ave           0 max           0 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:         309302 ave      309302 max      309302 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 309302
+Ave neighs/atom = 19.033969
+Ave special neighs/atom = 1.92
+Neighbor list builds = 9
+Dangerous builds = 0
+
+fix 1 all wall/lj126 zlo -32 0.1 1.0 1.1225 zhi 32 0.1 1.0 1.1225
+
+fix 3 all nve/limit 0.01
+fix		4 all langevin 1 1 1.0 90428
+fix             bias_all all bias_center 1.0 15
+thermo_style	custom step temp pe ke ebond
+thermo_modify flush yes
+thermo          10000
+
+timestep	0.005
+run 10000
+Generated 0 of 1 mixed pair_coeff terms from geometric mixing rule
+Per MPI rank memory allocation (min/avg/max) = 6.393 | 6.393 | 6.393 Mbytes
+   Step          Temp          PotEng         KinEng         E_bond    
+       100   0              5562668.7      0              5541332            10000   0.49082384     10.245879      0.73619046     7.5097119          10100   0.49118713     10.226313      0.73673536     7.5073323    
+Loop time of 172.497 on 1 procs for 10000 steps with 16250 atoms
+
+Performance: 25043.941 tau/day, 57.972 timesteps/s
+99.7% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 140.29     | 140.29     | 140.29     |   0.0 | 81.33
+Bond    | 3.574      | 3.574      | 3.574      |   0.0 |  2.07
+Neigh   | 16.147     | 16.147     | 16.147     |   0.0 |  9.36
+Comm    | 0.13805    | 0.13805    | 0.13805    |   0.0 |  0.08
+Output  | 0.00019597 | 0.00019597 | 0.00019597 |   0.0 |  0.00
+Modify  | 11.732     | 11.732     | 11.732     |   0.0 |  6.80
+Other   |            | 0.6108     |            |       |  0.35
+
+Nlocal:          16250 ave       16250 max       16250 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:            339 ave         339 max         339 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    1.19818e+06 ave 1.19818e+06 max 1.19818e+06 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 1198179
+Ave neighs/atom = 73.734092
+Ave special neighs/atom = 1.92
+Neighbor list builds = 377
+Dangerous builds = 0
+unfix 3
+fix 3 all nve
+
+dump 1 all custom 20000 file_trajectory.bin id type x y z xu yu zu vx vy vz
+
+restart 100000  prod.restart1 prod.restart2
+run 100000
+Generated 0 of 1 mixed pair_coeff terms from geometric mixing rule
+Per MPI rank memory allocation (min/avg/max) = 13.4 | 13.4 | 13.4 Mbytes
+   Step          Temp          PotEng         KinEng         E_bond    
+     10100   0.49118713     10.226313      0.73673536     7.5073323          20000   1.0029779      10.303324      1.5043742      7.532827           30000   0.99083447     10.234777      1.4861602      7.4886273          40000   1.0041338      10.211237      1.506108       7.4769557          50000   0.9929471      10.220396      1.489329       7.4735446          60000   1.0030651      10.16877       1.504505       7.4566764          70000   0.99880607     10.156564      1.4981169      7.4579164          80000   1.0038071      10.189005      1.505618       7.4618308          90000   0.98664662     10.1442        1.4798789      7.4409399         100000   0.99738808     10.15403       1.49599        7.4553551         110000   1.0031966      10.154971      1.5047024      7.4475751    
+    110100   0.99999927     10.179064      1.4999066      7.4564065    
+Loop time of 2083.58 on 1 procs for 100000 steps with 16250 atoms
+
+Performance: 20733.564 tau/day, 47.994 timesteps/s
+99.7% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 1555.6     | 1555.6     | 1555.6     |   0.0 | 74.66
+Bond    | 35.82      | 35.82      | 35.82      |   0.0 |  1.72
+Neigh   | 377.34     | 377.34     | 377.34     |   0.0 | 18.11
+Comm    | 2.5961     | 2.5961     | 2.5961     |   0.0 |  0.12
+Output  | 0.045457   | 0.045457   | 0.045457   |   0.0 |  0.00
+Modify  | 107.79     | 107.79     | 107.79     |   0.0 |  5.17
+Other   |            | 4.38       |            |       |  0.21
+
+Nlocal:          16250 ave       16250 max       16250 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:            365 ave         365 max         365 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    1.18079e+06 ave 1.18079e+06 max 1.18079e+06 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 1180789
+Ave neighs/atom = 72.663938
+Ave special neighs/atom = 1.92
+Neighbor list builds = 8123
+Dangerous builds = 192
+
+
+write_data data*.xyz
+System init for write_data ...
+Generated 0 of 1 mixed pair_coeff terms from geometric mixing rule
+WARNING: Not all mixed pair coeffs generated from mixing. Use write_data with 'pair ij' option to store all pair coeffs. (src/write_data.cpp:309)
+write_restart 	restart.polymer_ring
+System init for write_restart ...
+Generated 0 of 1 mixed pair_coeff terms from geometric mixing rule
+
+print "ALL done"
+ALL done
+Total wall time: 0:37:37

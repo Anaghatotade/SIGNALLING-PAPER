@@ -1,0 +1,58 @@
+
+units		lj
+boundary	p p f
+atom_style	bond
+ 
+log 		log.polymer_wall.txt
+pair_style lj/cut 4.0
+pair_modify shift yes
+
+read_restart prod.restart1
+bond_style fene
+special_bonds fene
+
+bond_coeff 1 10.0 2.0 1.0 1.0
+group polymer type 1
+
+pair_coeff	1 1 0.5 1.0 2.5
+pair_coeff 	1 2 50.0 1.0 4.0
+pair_coeff	2 2 1.0 1.0 1.1225
+
+
+neighbor       0.5 bin
+
+region upper_box block -30 30 -30 30 32.2 34.8
+create_atoms 2 random 1 998273 upper_box
+
+
+group ligand type 2
+
+fix 1 polymer wall/lj126 zlo -32 1.0 1.0 1.1225 zhi 32 1.0 1.0 1.1225 
+fix 2 ligand wall/lj126 zlo 32 1.0 1.0 1.1225 zhi 35 1.0 1.0 1.1225
+
+#minimize 1.0e-4 1.0e-6 100 1000
+
+fix 3 all nve/limit 0.01
+run 10000
+unfix 3
+
+fix 3 all nve
+fix		4 all langevin 1 1 100.0 90428
+
+thermo_style	custom step temp pe ke ebond
+thermo_modify flush yes
+thermo          10000
+
+timestep	0.005
+
+dump 1 all custom 50000 file_trajectory.bin id type x y z xu yu zu vx vy vz
+
+restart 100000  prod.restart2 prod.restart3
+
+run 20000000
+
+
+write_data data*.xyz
+write_restart 	restart.polymer_ring
+
+print "ALL done"

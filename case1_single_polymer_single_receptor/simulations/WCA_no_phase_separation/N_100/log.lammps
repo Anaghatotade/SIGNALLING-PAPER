@@ -1,0 +1,9 @@
+LAMMPS (23 Jun 2022)
+OMP_NUM_THREADS environment is not set. Defaulting to 1 thread. (src/comm.cpp:98)
+  using 1 OpenMP thread(s) per MPI task
+
+units		lj
+boundary	p p f
+atom_style	bond
+
+log 		log.polymer_wall.txt

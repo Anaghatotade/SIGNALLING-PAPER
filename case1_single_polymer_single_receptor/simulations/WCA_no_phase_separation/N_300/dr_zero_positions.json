@@ -1,0 +1,14 @@
+{
+  "cluster": {
+    "r_low": 26.14440625556229,
+    "r_high": null,
+    "peak_r": 33.5,
+    "peak_value": 0.006272571626640008
+  },
+  "all_polymer": {
+    "r_low": 26.442073599397386,
+    "r_high": null,
+    "peak_r": 33.5,
+    "peak_value": 0.00632676014376571
+  }
+}

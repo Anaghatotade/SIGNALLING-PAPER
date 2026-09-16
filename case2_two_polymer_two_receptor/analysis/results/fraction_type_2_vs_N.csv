@@ -1,0 +1,13 @@
+RootDir,N,Mean,Std,FramesUsed
+/home/user/Desktop/anagha3/SHIN_COLAB/linker2/cutoff2.5/e0.1 .. phase separated case,50,0.7704666666666666,0.24538128833850936,200
+/home/user/Desktop/anagha3/SHIN_COLAB/linker2/cutoff2.5/e0.1 .. phase separated case,100,0.8638499999999999,0.16437790048138062,200
+/home/user/Desktop/anagha3/SHIN_COLAB/linker2/cutoff2.5/e0.1 .. phase separated case,204,0.8849499999999999,0.09228607545140395,200
+/home/user/Desktop/anagha3/SHIN_COLAB/linker2/cutoff2.5/e0.25,50,0.9316916666666666,0.008066524619961457,200
+/home/user/Desktop/anagha3/SHIN_COLAB/linker2/cutoff2.5/e0.25,100,0.927025,0.008384637903796312,200
+/home/user/Desktop/anagha3/SHIN_COLAB/linker2/cutoff2.5/e0.25,204,0.9033000000000001,0.01672984691435573,200
+/home/user/Desktop/anagha3/SHIN_COLAB/linker2/cutoff2.5/e0.4 .. just touching case,50,0.9229416666666667,0.009122587200033899,200
+/home/user/Desktop/anagha3/SHIN_COLAB/linker2/cutoff2.5/e0.4 .. just touching case,100,0.9066833333333334,0.012596284725620046,200
+/home/user/Desktop/anagha3/SHIN_COLAB/linker2/cutoff2.5/e0.4 .. just touching case,204,0.9251416666666665,0.011583965810070786,200
+/home/user/Desktop/anagha3/SHIN_COLAB/linker2/cutoff2.5/e0.5 .. co phase separated case,50,0.963225,0.005507765981876062,200
+/home/user/Desktop/anagha3/SHIN_COLAB/linker2/cutoff2.5/e0.5 .. co phase separated case,100,0.9687083333333334,0.005776959744440747,200
+/home/user/Desktop/anagha3/SHIN_COLAB/linker2/cutoff2.5/e0.5 .. co phase separated case,204,0.9615416666666667,0.009313874805304666,200

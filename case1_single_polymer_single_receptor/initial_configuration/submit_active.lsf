@@ -1,0 +1,25 @@
+#BSUB -G ENGR-Lab-Pappu
+#BSUB -o LAMMPS_OUTPUT.%J
+#BSUB -J Initial_wall
+#BSUB -L /bin/bash
+#BSUB -n 16
+#BSUB -q "pappu pappu-compute"
+#BSUB -a openmpi
+#BSUB -R "select[model!='AMDEPYC_7343']"
+
+NUM_PROCS=16
+PROJECT_PATH=$PWD
+echo "${PROJECT_PATH}"
+# Change to where the project is located. Update this PATH for your program.
+cd "${PROJECT_PATH}"
+
+module add engr-lab-pappu
+module add intel-compiler-2020
+module add mpi/openmpi-x86_64
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/project/fava/lib
+
+CONFIG_FILE=lammps_sim.in
+LAMMPS_PATH=/project/fava/work/cgaurav/lammps_6_29/build/lmp
+
+# Run the program
+mpirun -np "${NUM_PROCS}" "${LAMMPS_PATH}" -i "${CONFIG_FILE}"

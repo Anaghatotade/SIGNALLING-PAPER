@@ -1,0 +1,28 @@
+#!/bin/bash
+# run_all_jobs.sh
+# Sequentially submit LAMMPS jobs in N_* folders
+
+
+hmDir=$PWD
+baseDir="/home/user/Desktop/Anagha/Shin_Colab/Linker_2/No_interaction"
+
+cd "$baseDir" || { echo "Base directory not found!"; exit 1; }
+
+for N in 20 50 100 125 150 200 300
+do
+    cd N_${N} || { echo "Folder N_${N} not found, skipping..."; cd "$baseDir"; continue; }
+
+    # Replace placeholder NUMBER with actual N value in both input files
+    sed -i "s/NUMBER/${N}/g" "lammps_sim.in"
+    sed -i "s/NUMBER/${N}/g" "submit_N.lsf"
+
+    # Submit the job using bsub
+    bsub < submit_N.lsf
+
+    # Go back to home directory for next loop iteration
+    cd "$baseDir"
+done
+
+cd "$hmDir"
+echo "All jobs submitted successfully."
+

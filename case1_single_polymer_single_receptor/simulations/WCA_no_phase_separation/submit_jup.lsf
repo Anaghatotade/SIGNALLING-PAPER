@@ -1,0 +1,16 @@
+#BSUB -G ENGR-Lab-Pappu
+#BSUB -o log_COC.%J
+#BSUB -J density_COC
+#BSUB -L /bin/bash
+#BSUB -n 1
+#BSUB -q "pappu pappu-compute"
+
+module add engr-lab-pappu
+module add intel-compiler-2020
+
+binary2txt file_trajectory.bin
+mv file_trajectory.bin.txt traj.lammpstrj
+
+source /project/engineering/anaconda3/bin/activate
+conda activate pappuPython
+jupyter nbconvert --execute --to notebook --inplace z_dense_phase_density_3_11.ipynb 

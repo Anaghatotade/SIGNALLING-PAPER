@@ -1,0 +1,74 @@
+units           lj
+boundary        p p f
+atom_style      bond
+
+log             log.polymer_wall.txt
+
+pair_style      lj/cut 4.0
+pair_modify     shift yes
+read_restart    prod.restart1    
+
+bond_style      fene
+special_bonds   fene
+bond_coeff      1 10.0 2.0 1.0 1.0
+
+group polymerA type 1
+group polymerB type 2
+group receptorC type 3
+group receptorD type 4
+group polymer union polymerA polymerB
+group ligand union receptorC receptorD
+
+# Polymer-Polymer
+pair_coeff 1 1 0.5 1.0 2.5      # A-A
+pair_coeff 2 2 0.5 1.0 2.5      # B-B
+pair_coeff 1 2 0.4 1.0 2.5      # A-B
+
+# Polymer-Receptor
+pair_coeff 1 3 50.0 1.0 4.0     # A-C
+pair_coeff 1 4 50.0 1.0 1.1225  # A-D
+pair_coeff 2 3 50.0 1.0 1.1225  # B-C
+pair_coeff 2 4 50.0 1.0 4.0     # B-D
+
+# Receptor-Receptor
+pair_coeff 3 3 1.0 1.0 1.1225
+pair_coeff 4 4 1.0 1.0 1.1225
+pair_coeff 3 4 1.0 1.0 1.1225
+
+neighbor        1.0 bin
+
+region upper_box block -40 40 -40 40 32.2 34.8
+create_atoms 3 random 100 998273 upper_box   # receptor C
+create_atoms 4 random 100 123456 upper_box   # receptor D
+
+group receptorC type 3
+group receptorD type 4
+group ligand union receptorC receptorD
+
+fix wall_poly polymer wall/lj126 zlo -32 1.0 1.0 1.1225 zhi 32 1.0 1.0 1.1225
+
+fix wall_lig ligand wall/lj126 zlo 32 1.0 1.0 1.1225 zhi 35 1.0 1.0 1.1225
+
+#minimize 1.0e-4 1.0e-6 100 1000
+
+fix 3 all nve/limit 0.01
+run 10000
+unfix 3
+
+fix 3 all nve
+fix 4 all langevin 1 1 1.0 90428   
+
+thermo_style    custom step temp pe ke ebond
+thermo_modify   flush yes
+thermo          10000
+timestep        0.005
+
+dump 1 all custom 50000 file_trajectory.bin id type x y z xu yu zu vx vy vz
+
+restart 100000 prod.restart2 prod.restart3
+run 20000000
+
+write_data data*.xyz
+write_restart 	restart.polymer_ring
+
+print "ALL done"
